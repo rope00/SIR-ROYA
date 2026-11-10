@@ -29,4 +29,4 @@ The publication PDF will be linked after final arXiv submission. No DOI has yet 
 
 ## Reuse rights
 
-The code and figures are made **publicly inspectable**. No open-source license has been applied at this stage; applicable copyright therefore remains in place. A reuse license will be chosen only after the rights holder confirms the desired terms. GitHub visibility does not by itself grant permission to copy or redistribute source code.
+The source code and model-derived CSV outputs are **publicly inspectable**; figure-generation scripts are provided. No open-source license has been applied at this stage; applicable copyright therefore remains in place. A reuse license will be chosen only after the rights holder confirms the desired terms. GitHub visibility does not by itself grant permission to copy or redistribute source code.
