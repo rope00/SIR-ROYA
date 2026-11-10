@@ -1,0 +1,9 @@
+cff-version: 1.2.0
+message: "Please cite the associated preprint after its arXiv identifier is assigned."
+title: "Climate-driven agent-based scenario modeling of oregano rust"
+type: software
+authors:
+  - family-names: "Sáez"
+    given-names: "Nicolás"
+date-released: "2026-11-10"
+version: "0.6.1"
