@@ -1,0 +1,12 @@
+__pycache__/
+*.pyc
+.ipynb_checkpoints/
+.env
+.env.*
+*.key
+*.token
+*.xls
+*.xlsx
+raw_data/
+data/*.csv
+!data/README_DATA.md
