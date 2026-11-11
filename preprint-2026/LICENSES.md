@@ -1,21 +1,23 @@
 # Licenses and scope — oregano preprint subproject
 
-These licenses apply only within `preprint-2026/` of this repository.
-**They do not alter the rights for files elsewhere in SIR-ROYA.**
+Scope: these notices apply **only** under `preprint-2026/` in the
+`rope00/SIR-ROYA` repository. No license is granted here for files outside
+that subdirectory.
 
-| Material | License | Documentation |
+| Material | Grant | Location |
 |---|---|---|
-| Original Python programs | MIT | [code/LICENSE](code/LICENSE) |
-| Original model-derived result files | CC BY 4.0 (to extent protectable) | [results/LICENSE](results/LICENSE) |
-| Original research figures when distributed | CC BY 4.0 | [figures/LICENSE](figures/LICENSE) |
-| Original text and figures of the preprint | CC BY 4.0 | Explicit license in the manuscript |
+| Author-created Python source code | MIT | `code/LICENSE` |
+| Original simulation-derived CSV outputs | CC BY 4.0 (to extent protectable) | `results/LICENSE` |
+| Original figures created by the author | CC BY 4.0 | `figures/LICENSE`, where published |
+| Original preprint text and figures | CC BY 4.0 | Copyright and license statement in manuscript |
+| Third-party photographs and original DMC/INIA daily meteorological observations | **Not covered** | Not included in the public subproject |
 
-**Excluded:** third-party photographs, external cited material, and DMC/INIA
-meteorological observations. Those works are not relicensed by this project.
+The copyright holder is Nicolás Sáez (2026). In research, academic citation
+and attribution of methods/results remain important in addition to license
+notices. See `CITATION.cff` for a citable software reference.
 
-Copyright © 2026 Nicolás Sáez.
-Full CC BY terms: https://creativecommons.org/licenses/by/4.0/legalcode
-MIT license terms: [code/LICENSE](code/LICENSE).
+Full CC BY 4.0 terms: https://creativecommons.org/licenses/by/4.0/legalcode
+MIT license text: `code/LICENSE`
 
-The source code/model is not a clinically or agriculturally calibrated forecast;
-these licenses do not imply validation of pathogen occurrence in Chile.
+This public branch has not yet been assigned a Zenodo DOI. Licensing alone
+does not assert scientific validation of the model or pathogen presence in Chile.
