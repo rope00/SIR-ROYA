@@ -29,7 +29,7 @@ The public candidate includes aggregate/model-derived simulation results and scr
 
 **Computational preprint author:** Nicolás Sáez. The original project was coordinated by Germán Sepúlveda, and field observations and photographs were gathered by Germán Sepúlveda and Mabel Arismendi. They reviewed the revised single-author manuscript and, according to their written reply provided to the author, approved the single-author publication and their acknowledgment. No field photographs or third-party daily weather records are distributed here.
 
-The publication PDF will be linked after final arXiv submission. This release is prepared for a Zenodo software deposit; a DOI will be recorded after Zenodo publication. For data provenance and attribution, see `data/README_DATA.md`.
+The publication PDF will be linked after final arXiv submission. The curated source and simulation outputs are permanently archived on Zenodo as software version 1.0.0: https://doi.org/10.5281/zenodo.24142228 (all-versions DOI: https://doi.org/10.5281/zenodo.24142225). For data provenance and attribution, see `data/README_DATA.md`.
 
 ## Reuse licenses (2026)
 
@@ -45,4 +45,4 @@ Please cite the software and the eventual arXiv preprint in scholarly use.
 This grant does **not** include photographs, external publications, or
 meteorological records from DMC/INIA; see [DATA_POLICY.md](DATA_POLICY.md).
 See [LICENSES.md](LICENSES.md) for the complete scope and the CC BY legal text.
-A Zenodo DOI has not yet been assigned.
+**Cite the deposited version:** Sáez, N. (2026). *Oregano rust climate-driven agent-based model: Python source and Monte Carlo simulation outputs (v1.0.0)* [Computer software]. Zenodo. https://doi.org/10.5281/zenodo.24142228
