@@ -5,6 +5,6 @@ type: software
 authors:
   - family-names: "Sáez"
     given-names: "Nicolás"
-date-released: "2026-11-10"
-version: "0.6.1"
+date-released: "2026-11-11"
+version: "1.0.0"
 license: MIT
