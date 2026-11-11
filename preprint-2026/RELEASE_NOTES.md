@@ -21,5 +21,4 @@ The complete model rerun requires users to acquire RE1018 daily observations
 from DMC under the provider's own usage terms. Precomputed model-derived results
 are provided to permit reanalysis without redistributing the meteorological records.
 
-The associated manuscript is version 6.2 (before arXiv submission). An arXiv
-identifier and Zenodo DOI have not yet been assigned.
+The associated manuscript is version 6.3 with the software DOI incorporated (before arXiv submission). The software version 1.0.0 was published on Zenodo on 2026-11-11: https://doi.org/10.5281/zenodo.24142228. An arXiv identifier has not yet been assigned.
