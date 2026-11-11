@@ -12,7 +12,6 @@ YEARS = range(2020, 2025)
 MONTHS = range(1, 13)
 
 RAW = Path("re1018_raw_html")
-RAW.mkdir(exist_ok=True)
 
 session = requests.Session()
 session.headers["User-Agent"] = "Mozilla/5.0"
@@ -91,90 +90,99 @@ def parse_month(html, station, locality, year, month, url):
         })
     return pd.DataFrame(rows)
 
-frames = []
-failures = []
+def main():
+    import argparse
+    parser = argparse.ArgumentParser(description="Retrieve DMC RE1018 daily observations for the three study stations during 2020--2024. Does not run downloads with --help.")
+    parser.parse_args()
+    RAW.mkdir(exist_ok=True)
+    frames = []
+    failures = []
 
-total = len(STATIONS) * len(list(YEARS)) * len(list(MONTHS))
-i = 0
+    total = len(STATIONS) * len(list(YEARS)) * len(list(MONTHS))
+    i = 0
 
-print(f"Consultas programadas: {total}")
+    print(f"Consultas programadas: {total}")
 
-for station, locality in STATIONS.items():
-    for year in YEARS:
-        for month in MONTHS:
-            i += 1
-            label = f"{locality} {year}-{month:02d}"
-            print(f"[{i:03d}/{total}] {label}", end=" ... ")
+    for station, locality in STATIONS.items():
+        for year in YEARS:
+            for month in MONTHS:
+                i += 1
+                label = f"{locality} {year}-{month:02d}"
+                print(f"[{i:03d}/{total}] {label}", end=" ... ")
 
-            try:
-                html, url = fetch(station, year, month)
-                df = parse_month(html, station, locality, year, month, url)
+                try:
+                    html, url = fetch(station, year, month)
+                    df = parse_month(html, station, locality, year, month, url)
 
-                if df.empty:
-                    print("SIN DATOS")
-                    failures.append([station, locality, year, month, "sin datos"])
-                else:
-                    frames.append(df)
-                    nv_t = df["temp_mean_c"].notna().sum()
-                    nv_h = df["rh_mean_pct"].notna().sum()
-                    print(f"OK ({len(df)} dias; T={nv_t}; HR={nv_h})")
-            except Exception as e:
-                print(f"ERROR: {e}")
-                failures.append([station, locality, year, month, str(e)])
+                    if df.empty:
+                        print("SIN DATOS")
+                        failures.append([station, locality, year, month, "sin datos"])
+                    else:
+                        frames.append(df)
+                        nv_t = df["temp_mean_c"].notna().sum()
+                        nv_h = df["rh_mean_pct"].notna().sum()
+                        print(f"OK ({len(df)} dias; T={nv_t}; HR={nv_h})")
+                except Exception as e:
+                    print(f"ERROR: {e}")
+                    failures.append([station, locality, year, month, str(e)])
 
-            time.sleep(0.35)
+                time.sleep(0.35)
 
-if not frames:
-    raise SystemExit("No se recuperaron datos.")
+    if not frames:
+        raise SystemExit("No se recuperaron datos.")
 
-full = pd.concat(frames, ignore_index=True)
-full = full.sort_values(["station_code","date"]).reset_index(drop=True)
+    full = pd.concat(frames, ignore_index=True)
+    full = full.sort_values(["station_code","date"]).reset_index(drop=True)
 
-if full.duplicated(["station_code","date"]).any():
-    raise SystemExit("Hay fechas duplicadas. Se detuvo por seguridad.")
+    if full.duplicated(["station_code","date"]).any():
+        raise SystemExit("Hay fechas duplicadas. Se detuvo por seguridad.")
 
-full.to_csv("clima_diario_tres_localidades_completo.csv", index=False, date_format="%Y-%m-%d")
+    full.to_csv("clima_diario_tres_localidades_completo.csv", index=False, date_format="%Y-%m-%d")
 
-model = full[[
-    "date","locality","temp_mean_c","rh_mean_pct",
-    "precip_mm","evapotranspiration_mm_day","source"
-]].copy()
+    model = full[[
+        "date","locality","temp_mean_c","rh_mean_pct",
+        "precip_mm","evapotranspiration_mm_day","source"
+    ]].copy()
 
-model.to_csv("clima_diario_tres_localidades.csv", index=False, date_format="%Y-%m-%d")
+    model.to_csv("clima_diario_tres_localidades.csv", index=False, date_format="%Y-%m-%d")
 
-expected = pd.date_range("2020-01-01","2024-12-31",freq="D")
-report = []
+    expected = pd.date_range("2020-01-01","2024-12-31",freq="D")
+    report = []
 
-for station, locality in STATIONS.items():
-    x = full[full["station_code"] == station]
-    valid = x.dropna(subset=["temp_mean_c","rh_mean_pct"])
-    dates = pd.DatetimeIndex(valid["date"].unique())
+    for station, locality in STATIONS.items():
+        x = full[full["station_code"] == station]
+        valid = x.dropna(subset=["temp_mean_c","rh_mean_pct"])
+        dates = pd.DatetimeIndex(valid["date"].unique())
 
-    report.append({
-        "station_code": station,
-        "locality": locality,
-        "valid_days": len(dates),
-        "expected_days": len(expected),
-        "coverage_pct": round(100*len(dates.intersection(expected))/len(expected),2),
-        "missing_days": len(expected.difference(dates)),
-        "mean_temp_c": round(valid["temp_mean_c"].mean(),3) if len(valid) else np.nan,
-        "mean_rh_pct": round(valid["rh_mean_pct"].mean(),3) if len(valid) else np.nan,
-    })
+        report.append({
+            "station_code": station,
+            "locality": locality,
+            "valid_days": len(dates),
+            "expected_days": len(expected),
+            "coverage_pct": round(100*len(dates.intersection(expected))/len(expected),2),
+            "missing_days": len(expected.difference(dates)),
+            "mean_temp_c": round(valid["temp_mean_c"].mean(),3) if len(valid) else np.nan,
+            "mean_rh_pct": round(valid["rh_mean_pct"].mean(),3) if len(valid) else np.nan,
+        })
 
-report = pd.DataFrame(report)
-report.to_csv("reporte_cobertura_re1018.csv", index=False)
+    report = pd.DataFrame(report)
+    report.to_csv("reporte_cobertura_re1018.csv", index=False)
 
-if failures:
-    pd.DataFrame(
-        failures,
-        columns=["station_code","locality","year","month","reason"]
-    ).to_csv("re1018_fallos.csv", index=False)
+    if failures:
+        pd.DataFrame(
+            failures,
+            columns=["station_code","locality","year","month","reason"]
+        ).to_csv("re1018_fallos.csv", index=False)
 
-print("\n=== COBERTURA ===")
-print(report.to_string(index=False))
-print("\nGenerados:")
-print("clima_diario_tres_localidades.csv")
-print("clima_diario_tres_localidades_completo.csv")
-print("reporte_cobertura_re1018.csv")
-if failures:
-    print("re1018_fallos.csv")
+    print("\n=== COBERTURA ===")
+    print(report.to_string(index=False))
+    print("\nGenerados:")
+    print("clima_diario_tres_localidades.csv")
+    print("clima_diario_tres_localidades_completo.csv")
+    print("reporte_cobertura_re1018.csv")
+    if failures:
+        print("re1018_fallos.csv")
+
+
+if __name__ == "__main__":
+    main()
