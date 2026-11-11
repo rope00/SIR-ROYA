@@ -1,10 +1,14 @@
 cff-version: 1.2.0
-message: "Please cite the associated preprint after its arXiv identifier is assigned."
-title: "Climate-driven agent-based scenario modeling of oregano rust"
+message: "If you use the source code or simulation outputs, please cite the published Zenodo software archive."
+title: "Oregano rust climate-driven agent-based model: Python source and Monte Carlo simulation outputs (v1.0.0)"
 type: software
 authors:
   - family-names: "Sáez"
     given-names: "Nicolás"
+    orcid: "https://orcid.org/0009-0009-3540-2062"
 date-released: "2026-11-11"
 version: "1.0.0"
+doi: "10.5281/zenodo.24142228"
+url: "https://doi.org/10.5281/zenodo.24142228"
+repository-code: "https://github.com/rope00/SIR-ROYA/tree/oregano-software-v1.0.0-release-candidate/preprint-2026"
 license: MIT
