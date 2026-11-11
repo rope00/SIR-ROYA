@@ -10,9 +10,13 @@ Python 3.11+ is recommended. Create an environment and run:
 
 ```bash
 python -m pip install -r requirements.txt
-python code/download_re1018.py --help
+python code/download_re1018.py --help  # documentation only; does not download
+# Obtain DMC daily RE1018 records under provider's usage conditions:
+python code/download_re1018.py          # fetches 180 monthly pages; internet required
+python code/clean_re1018_v4.py --input clima_diario_tres_localidades.csv --output data/clima_diario_tres_localidades_qc.csv
+python code/simulate_v4.py --input data/clima_diario_tres_localidades_qc.csv --output results/reproduced --smoke-test
 python code/simulate_v4.py --input data/clima_diario_tres_localidades_qc.csv --output results/reproduced --full
-python code/convergence_runner.py
+python code/convergence_runner.py      # 10,500 simulations; computationally demanding
 ```
 
 The `convergence_runner.py` script reproduces the seven-case, 10,500-run Monte Carlo convergence experiment with a fresh controlled seed stream. A full source-driven reconstruction is conditional on obtaining daily DMC records. All spatial units are model lattice cells; absolute field risk must not be inferred without calibration.
@@ -25,7 +29,7 @@ The public candidate includes aggregate/model-derived simulation results and scr
 
 **Computational preprint author:** Nicolás Sáez. The original project was coordinated by Germán Sepúlveda, and field observations and photographs were gathered by Germán Sepúlveda and Mabel Arismendi. They reviewed the revised single-author manuscript and, according to their written reply provided to the author, approved the single-author publication and their acknowledgment. No field photographs or third-party daily weather records are distributed here.
 
-The publication PDF will be linked after final arXiv submission. No DOI has yet been assigned. For data provenance and attribution, see `data/README_DATA.md`.
+The publication PDF will be linked after final arXiv submission. This release is prepared for a Zenodo software deposit; a DOI will be recorded after Zenodo publication. For data provenance and attribution, see `data/README_DATA.md`.
 
 ## Reuse licenses (2026)
 
