@@ -27,6 +27,18 @@ The public candidate includes aggregate/model-derived simulation results and scr
 
 The publication PDF will be linked after final arXiv submission. No DOI has yet been assigned. For data provenance and attribution, see `data/README_DATA.md`.
 
-## Reuse rights
+## Reuse licenses (2026)
 
-The source code and model-derived CSV outputs are **publicly inspectable**; figure-generation scripts are provided. No open-source license has been applied at this stage; applicable copyright therefore remains in place. A reuse license will be chosen only after the rights holder confirms the desired terms. GitHub visibility does not by itself grant permission to copy or redistribute source code.
+Copyright © 2026 Nicolás Sáez. Licenses are **scoped to this subproject**;
+other material elsewhere in `SIR-ROYA` is not affected.
+
+- **Original Python code:** MIT License. See [code/LICENSE](code/LICENSE).
+- **Original simulation-derived CSV outputs:** CC BY 4.0 (where protectable). See [results/LICENSE](results/LICENSE).
+- **Original research figures:** CC BY 4.0. See [figures/LICENSE](figures/LICENSE).
+- **Original preprint text and figures:** CC BY 4.0. The same notice is in the manuscript.
+
+Please cite the software and the eventual arXiv preprint in scholarly use.
+This grant does **not** include photographs, external publications, or
+meteorological records from DMC/INIA; see [DATA_POLICY.md](DATA_POLICY.md).
+See [LICENSES.md](LICENSES.md) for the complete scope and the CC BY legal text.
+A Zenodo DOI has not yet been assigned.
